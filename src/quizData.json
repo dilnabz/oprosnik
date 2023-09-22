@@ -1,0 +1,89 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Entertainment: Video Games",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "Metal Gear Solid V: The Phantom Pain runs on the Fox Engine.",
+      "correct_answer": ["True"],
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Celebrities",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the religion of famous singer &quot;Freddie Mercury&quot;?",
+      "correct_answer": ["Zoroastrianism"],
+      "incorrect_answers": ["Paganism", "Ashurism", "Judaism"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "question": "Which of these games were released on PlayStation 2?",
+      "correct_answer": ["GTA: San Andreas", "NFS: Most Wanted"],
+      "incorrect_answers": ["World of Warcraft", "Overwatch"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What was the release date of &quot;Grand Theft Auto IV&quot;?",
+      "correct_answer": ["April 29, 2008"],
+      "incorrect_answers": ["May 21, 2009", "June 22, 2010", "July 28, 2008"]
+    },
+    {
+      "category": "Animals",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "question": "Which of these are insects?",
+      "correct_answer": ["Fly", "Spider"],
+      "incorrect_answers": ["Snake", "Rat"]
+    },
+    {
+      "category": "Entertainment: Television",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the UK &quot;Who Wants to be a Millionaire?&quot; cheating scandal known as?",
+      "correct_answer": ["Major Fraud"],
+      "incorrect_answers": [
+        "Ingram Cheater",
+        "Coughing Major",
+        "Millionaire Crime"
+      ]
+    },
+    {
+      "category": "Sports",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "There are a total of 20 races in Formula One 2016 season.",
+      "correct_answer": ["False"],
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Geography",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many provinces are in the Netherlands?",
+      "correct_answer": ["12"],
+      "incorrect_answers": ["14", "10", "13"]
+    },
+    {
+      "category": "Politics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Between 1973 to 1990, what country was ruled by dictator Augusto Pinochet?",
+      "correct_answer": ["Chile"],
+      "incorrect_answers": ["Ethiopia", "Indonesia", "Nicaragua"]
+    },
+    {
+      "category": "Entertainment: Music",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who was the guitarist in the band &quot;The Doors&quot;?",
+      "correct_answer": ["Robby Krieger"],
+      "incorrect_answers": ["Eric Clapton", "John Densmore", "Jimi Hendrix"]
+    }
+  ]
+}

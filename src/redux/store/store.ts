@@ -1,11 +1,16 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { dataSlice } from '../features/dataSlice';
+import { answersSlice } from '../features/answersSlice';
+
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+    reducer: {
+        quizData: dataSlice.reducer,
+        answQData: answersSlice.reducer,
+    }
 });
+
+
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
