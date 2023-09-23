@@ -3,6 +3,7 @@ import { useAppDispatch } from "../redux/store/hooks";
 import { State } from "../redux/features/dataSlice";
 import { setAnswers } from "../redux/features/answersSlice";
 import { decode } from "html-entities";
+import { Typography, Box, Card, CardContent, CardActions, RadioGroup, FormControlLabel, Radio, Checkbox, Button} from "@mui/material";
 
 
 interface QuizCardProps {
@@ -50,31 +51,87 @@ export function QuizCard({quizData, setShowResults}: QuizCardProps) {
     };
 
     return(
-        <div>
-            <h4>Question {questionIndex+1}</h4>
-            <h3>{decode(quizData.results[questionIndex].question)}</h3>
-                <form key={questionIndex}>
-                    {options.map((data, id) => {
-                        return (
-                        <div key={id}>
-                            <label>
-                                <input
-                                    type={quizData.results[questionIndex].type === "multiple_choice" 
-                                        ? "checkbox" : "radio"}
+        <Card style={{maxWidth: "600px", minWidth: "350px"}}>
+            <CardContent>
+                <Typography sx={{fontSize: 24}} align="center" mb={2}>
+                    Question {questionIndex+1}
+                </Typography>
+                <Typography sx={{fontSize: 18}} align="center" mb={2}>
+                    {decode(quizData.results[questionIndex].question)}
+                </Typography>
+                <Box display="flex" justifyContent='center'>
+                    <RadioGroup key={questionIndex}>
+                        {options.map((data, id) => {
+                            return(
+                                <FormControlLabel
+                                    key={id}
                                     value={decode(data)}
-                                    name="answer"
-                                    onChange={handleClickAnswer}
-                                    checked = {selectedAnswer.includes(decode(data))}
+                                    control={
+                                        quizData.results[questionIndex].type === "multiple_choice"
+                                        ? <Checkbox 
+                                            checked = {selectedAnswer.includes(decode(data))}
+                                            onChange={handleClickAnswer}
+                                        />
+                                        : <Radio 
+                                        checked = {selectedAnswer.includes(decode(data))}
+                                        onChange={handleClickAnswer}
+                                        />
+                                    }
+                                    label = {decode(data)}
                                 />
-                                {decode(data)}
-                            </label>
-                        </div>
-                        )
-                    })}
-                </form>
-                {questionIndex + 1 === quizData.results.length ? 
-                    <button onClick={() => setShowResults(true)} disabled={selectedAnswer.length === 0}>Show Results</button> :
-                    <button onClick={handleNextQuestion} disabled={selectedAnswer.length === 0}>Next</button>}
-        </div>
+                            )
+                        })}
+                    </RadioGroup>
+                </Box>
+            </CardContent>
+            <CardActions style={{justifyContent: "center"}}>
+                {questionIndex + 1 === quizData.results.length
+                    ?   <Button 
+                            size="large"
+                            variant="contained"
+                            onClick={() => setShowResults(true)}
+                            disabled={selectedAnswer.length === 0}
+                        >
+                            Show Results
+                        </Button>
+                    :   <Button
+                            size="large"
+                            variant="contained"
+                            onClick={handleNextQuestion}
+                            disabled={selectedAnswer.length === 0}
+                        >
+                            Next
+                        </Button>
+                }
+            </CardActions>
+        </Card>
     )
 }
+
+
+// <div>
+// <h4>Question {questionIndex+1}</h4>
+// <h3>{decode(quizData.results[questionIndex].question)}</h3>
+//     <form key={questionIndex}>
+//         {options.map((data, id) => {
+//             return (
+//             <div key={id}>
+//                 <label>
+//                     <input
+//                         type={quizData.results[questionIndex].type === "multiple_choice" 
+//                             ? "checkbox" : "radio"}
+//                         value={decode(data)}
+//                         name="answer"
+//                         onChange={handleClickAnswer}
+//                         checked = {selectedAnswer.includes(decode(data))}
+//                     />
+//                     {decode(data)}
+//                 </label>
+//             </div>
+//             )
+//         })}
+//     </form>
+//     {questionIndex + 1 === quizData.results.length ? 
+//         <button onClick={() => setShowResults(true)} disabled={selectedAnswer.length === 0}>Show Results</button> :
+//         <button onClick={handleNextQuestion} disabled={selectedAnswer.length === 0}>Next</button>}
+// </div>

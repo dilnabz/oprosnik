@@ -1,9 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
 import { QuizCard } from './components/QuizCard';
 import { useAppSelector, useAppDispatch } from './redux/store/hooks';
 import { decode } from "html-entities";
 import { fetchQuiz } from './redux/features/dataSlice';
+import { Typography, Button, Box, SvgIcon } from '@mui/material';
+
+function isEqualArrays(arr1: string[], arr2: string[]): boolean {
+  const set1 = new Set(arr1);
+  const set2 = new Set(arr2);
+  if (set1.size !== set2.size) return false;
+  for (const elem of set2) {
+      if (!set1.has(elem)) return false;
+  }
+  return true;
+}
+
+function SquareIcon() {
+  return (
+    <SvgIcon>
+      <rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2"/>
+    </SvgIcon>
+  );
+}
 
 export function App() {
   const answQData = useAppSelector(state => state.answQData);
@@ -18,16 +36,6 @@ export function App() {
   }, [dispatch]);
 
   // console.log("quizData", quizData.results)
-
-  function isEqualArrays(arr1: string[], arr2: string[]): boolean {
-    const set1 = new Set(arr1);
-    const set2 = new Set(arr2);
-    if (set1.size !== set2.size) return false;
-    for (const elem of set2) {
-        if (!set1.has(elem)) return false;
-    }
-    return true;
-  }
   
   const score = quizData.results
     .filter((data) => isEqualArrays(data.correct_answer, answQData.answered_questions[data.id]))
@@ -44,38 +52,108 @@ export function App() {
 
   if (showResults) {
     return (
-      <div>
-        {sortedResults.map((data) => {
-          return(
-          <div key={data.id} style={{ margin: '15px 0 15px 0' }}>
-            <div>Difficulty: {decode(data.difficulty)}</div>
-            <div>Correct answer: {data.type === "multiple_choice" 
+      <Box 
+        display="flex" 
+        justifyContent="center" 
+        mt={2} 
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Typography 
+          sx={{fontSize: "30px"}} 
+          align='center' 
+          mb={1}
+        >
+          Congratulations! Here your results:
+        </Typography>
+        <Typography sx={{fontSize: "24px"}} align='center' mb={1}>Your score: {score}</Typography>
+        <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center" mb={1}>
+          <Typography sx={{fontSize: "16px"}} align='center' mb={1}>Questions difficulty</Typography>
+          <Box>
+            <Box color="red" flexBasis="33%"> 
+              <Typography sx={{fontSize: "14px"}}><SquareIcon /> - hard</Typography></Box>
+            <Box color="orange" flexBasis="33%">
+              <Typography sx={{fontSize: "14px"}}><SquareIcon /> - medium</Typography>
+            </Box>
+            <Box color="green" flexBasis="33%">
+              <Typography sx={{fontSize: "14px"}}><SquareIcon />  - easy</Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Box>
+          {sortedResults.map((data) => {
+            return(
+              <Box key={data.id} display="flex" mb={2} width="80%">
+                <Box
+                  style= {{
+                    display: "flex",
+                    alignItems: "center",
+                    border: "3px solid",
+                    borderColor:
+                      data.difficulty === 'hard' ? 'red' :
+                      data.difficulty === 'medium' ? 'yellow' :
+                      data.difficulty === 'easy' ? 'green' : 'white',
+                    flexBasis: "60%",
+                    padding: "10px",
+                    marginRight: "10px"
+                  }}
+                >
+                  <Typography sx={{fontSize: "18px"}}>{decode(data.question)}</Typography>
+                </Box>
+                <Box 
+                  display="flex" 
+                  flexDirection="column" 
+                  style={{border: "3px solid black", padding: "10px"}}
+                  flexBasis="40%" 
+                  justifyContent="center"
+                >
+                    <Typography sx={{fontSize: "16px"}}> {`Correct answer: 
+                                  ${data.type === "multiple_choice" 
                                   ? decode(data.correct_answer.join(", ")) 
-                                  : decode(data.correct_answer.join())}</div>
-            <div>Your answer: {data.type === "multiple_choice" 
+                                  : decode(data.correct_answer.join())}`}
+                    </Typography>
+                    <Typography sx={{fontSize: "16px"}}> {`Your answer: 
+                              ${data.type === "multiple_choice" 
                               ? decode(answQData.answered_questions[data.id].join(", ")) 
-                              : decode(answQData.answered_questions[data.id].join())}</div>
-          </div>)
-        })}
-        <div>Your score: {score}</div>
-      </div>
+                              : decode(answQData.answered_questions[data.id].join())}`}    
+                    </Typography>
+                </Box>
+              </Box>
+            )
+          })}
+        </Box>
+      </Box>
     );
   };
   if (start) {
     return (
-      <div className='App'>
+      <Box
+        display="flex"
+        justifyContent="center"
+        mt={5}
+      >
         <QuizCard 
-          quizData = {quizData}
-          setShowResults = {setShowResults}
+          quizData={quizData}
+          setShowResults={setShowResults}
         />
-      </div>
+      </Box>
     );
   }
 
   return (
-    <div className='App'>
-      <h1>Let's go!</h1>
-      <button onClick={() => setStart(true)}>Start</button>
-    </div>
+    <Box 
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+    >
+      <Button 
+        variant='text' 
+        onClick={() => setStart(true)}
+      >
+        <Typography variant='h3'>Let's start!</Typography>
+      </Button>
+    </Box>
   );
 }
