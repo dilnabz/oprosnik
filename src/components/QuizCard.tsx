@@ -105,33 +105,5 @@ export function QuizCard({quizData, setShowResults}: QuizCardProps) {
                 }
             </CardActions>
         </Card>
-    )
-}
-
-
-// <div>
-// <h4>Question {questionIndex+1}</h4>
-// <h3>{decode(quizData.results[questionIndex].question)}</h3>
-//     <form key={questionIndex}>
-//         {options.map((data, id) => {
-//             return (
-//             <div key={id}>
-//                 <label>
-//                     <input
-//                         type={quizData.results[questionIndex].type === "multiple_choice" 
-//                             ? "checkbox" : "radio"}
-//                         value={decode(data)}
-//                         name="answer"
-//                         onChange={handleClickAnswer}
-//                         checked = {selectedAnswer.includes(decode(data))}
-//                     />
-//                     {decode(data)}
-//                 </label>
-//             </div>
-//             )
-//         })}
-//     </form>
-//     {questionIndex + 1 === quizData.results.length ? 
-//         <button onClick={() => setShowResults(true)} disabled={selectedAnswer.length === 0}>Show Results</button> :
-//         <button onClick={handleNextQuestion} disabled={selectedAnswer.length === 0}>Next</button>}
-// </div>
+    );
+};

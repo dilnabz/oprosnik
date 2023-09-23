@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { QuizCard } from './components/QuizCard';
 import { useAppSelector, useAppDispatch } from './redux/store/hooks';
 import { decode } from "html-entities";
-import { fetchQuiz } from './redux/features/dataSlice';
-import { Typography, Button, Box, SvgIcon } from '@mui/material';
+import { fetchQuiz, State, Question } from './redux/features/dataSlice';
+import { Typography, Button, Box, SvgIcon, CircularProgress } from '@mui/material';
+import quizDataFromJson from "./quizData.json";
 
 function isEqualArrays(arr1: string[], arr2: string[]): boolean {
   const set1 = new Set(arr1);
@@ -23,9 +24,22 @@ function SquareIcon() {
   );
 }
 
+// const crypto = require('crypto');
+
+// Object.defineProperty(globalThis, 'crypto', {
+//   value: {
+//     //@ts-ignore
+//     getRandomValues: arr => crypto.randomBytes(arr.length)
+//   }
+// });
+
 export function App() {
   const answQData = useAppSelector(state => state.answQData);
   const quizData = useAppSelector(state => state.quizData);
+  // const {response_code, results} = quizDataFromJson;
+  // const questions: Question[] = results.map((data) => ({...data, id: crypto.randomUUID(), correct_answer: Array.isArray(data.correct_answer) ? data.correct_answer : [data.correct_answer]}))
+  // const quizData: State = {response_code, results: questions, loading: "loaded", error: ""};
+
   const dispatch  = useAppDispatch();
 
   const [showResults, setShowResults] = useState(false);
@@ -46,9 +60,9 @@ export function App() {
     return order.indexOf(a.difficulty) - order.indexOf(b.difficulty)
   })
 
-  // if (quizData.loading !== "loaded") {
-  //   return <div>Loading...</div>
-  // }
+  if (quizData.loading !== "loaded") {
+    return <Box display="flex" justifyContent="center" alignItems="center"><CircularProgress /></Box>
+  }
 
   if (showResults) {
     return (
