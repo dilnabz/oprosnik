@@ -118,7 +118,7 @@ export function Results({ quizData, answQData }: ResultsProps) {
       <Box>
         {sortedResults.map((data) => {
           return (
-            <Box key={data.id} display="flex" mb={2}>
+            <Box key={data.id} display="flex" mb={2} data-testid="result-item">
               <Box
                 style={{
                   display: "flex",
@@ -198,25 +198,6 @@ export function Results({ quizData, answQData }: ResultsProps) {
                     </Box>
                   )}
                 </Box>
-                {/* <Typography sx={{ fontSize: "16px" }}>
-                  {`Your answer: 
-                                ${
-                                  data.type === "multiple_choice"
-                                    ? decode(
-                                        answQData.answered_questions[
-                                          data.id
-                                        ].join(", ")
-                                      )
-                                    : decode(
-                                        answQData.answered_questions[
-                                          data.id
-                                        ].join()
-                                      )
-                                }`}
-                  {rightAnswersId.includes(data.id) && (
-                      <GreenCheckMark />
-                  )}
-                </Typography> */}
               </Box>
             </Box>
           );
