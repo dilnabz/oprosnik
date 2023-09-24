@@ -18,7 +18,7 @@ describe("Карточка вопроса отображается коррек�
     fireEvent.click(startBtn);
   
     await waitFor(() => {
-      const questionNumber = getByText("Question 1");
+      const questionNumber = getByText("Question 1 / 10");
       const questionText = getByText("Metal Gear Solid V: The Phantom Pain runs on the Fox Engine.")
       const questionAnswer1 = getByText("True");
       const questionAnswer2 = getByText("False");

@@ -77,6 +77,6 @@ describe("Все кнопки работают", () => {
       //@ts-ignore
     fireEvent.click(answerBtn);
     fireEvent.click(nextBtn);
-    expect(getByText("Question 2")).toBeInTheDocument();
+    expect(getByText("Question 2 / 10")).toBeInTheDocument();
   })
 })
