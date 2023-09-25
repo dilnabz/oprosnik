@@ -25,7 +25,7 @@ export function App() {
       </Box>
     );
   }
-  console.log(quizData)
+
   if (showResults) {
     return <Results quizData={quizData} answeredQuestionsData={answeredQuestionsData} />;
   }
