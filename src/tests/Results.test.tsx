@@ -38,7 +38,7 @@ describe("Результат отображается корректно", () =>
       ],
     };
 
-    const answQData = {
+    const answeredQuestionsData = {
       answered_questions: {
         1: ["A"],
         2: ["B"],
@@ -47,7 +47,7 @@ describe("Результат отображается корректно", () =>
     };
 
     const { getAllByTestId } = render(
-      <Results quizData={quizData} answQData={answQData} />
+      <Results quizData={quizData} answeredQuestionsData={answeredQuestionsData} />
     );
 
     const resultItems = getAllByTestId("result-item");
@@ -92,7 +92,7 @@ describe("Результат отображается корректно", () =>
       ],
     };
 
-    const answQData = {
+    const answeredQuestionsData = {
       answered_questions: {
         1: ["A"],
         2: ["B"],
@@ -101,7 +101,7 @@ describe("Результат отображается корректно", () =>
     };
 
     const { getByText } = render(
-      <Results quizData={quizData} answQData={answQData} />
+      <Results quizData={quizData} answeredQuestionsData={answeredQuestionsData} />
     );
 
 		const score = getByText("Your score: 3");

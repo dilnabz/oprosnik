@@ -5,7 +5,7 @@ import { decode } from "html-entities";
 
 interface ResultsProps {
   quizData: State;
-  answQData: AnswersState;
+  answeredQuestionsData: AnswersState;
 }
 
 function isEqualArrays(arr1: string[], arr2: string[]): boolean {
@@ -42,16 +42,16 @@ function GreenCheckMark() {
   );
 }
 
-export function Results({ quizData, answQData }: ResultsProps) {
+export function Results({ quizData, answeredQuestionsData }: ResultsProps) {
   const score = quizData.results.filter((data) =>
-    isEqualArrays(data.correct_answer, answQData.answered_questions[data.id])
+    isEqualArrays(data.correct_answer, answeredQuestionsData.answered_questions[data.id])
   ).length;
 
   const rightAnswersId: number[] = [];
 
   quizData.results.forEach((data) => {
     if (
-      isEqualArrays(data.correct_answer, answQData.answered_questions[data.id])
+      isEqualArrays(data.correct_answer, answeredQuestionsData.answered_questions[data.id])
     ) {
       rightAnswersId.push(data.id);
     }
@@ -176,12 +176,12 @@ export function Results({ quizData, answQData }: ResultsProps) {
                                 ${
                                   data.type === "multiple_choice"
                                     ? decode(
-                                        answQData.answered_questions[
+                                        answeredQuestionsData.answered_questions[
                                           data.id
                                         ].join(", ")
                                       )
                                     : decode(
-                                        answQData.answered_questions[
+                                        answeredQuestionsData.answered_questions[
                                           data.id
                                         ].join()
                                       )

@@ -13,13 +13,13 @@ describe("Все кнопки работают", () => {
     
     const { findByRole, getByRole } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
   
     await waitFor(() => {
-      const nextBtn = getByRole("button", {name: "Next"});
-      expect(nextBtn).toBeInTheDocument();
+      const nextButton = getByRole("button", {name: "Next"});
+      expect(nextButton).toBeInTheDocument();
     })
   }),
   it("Нельзя перейти на следующий вопрос, не ответив на текущий", async() => {
@@ -31,13 +31,13 @@ describe("Все кнопки работают", () => {
     
     const { findByRole } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
     
-    const nextBtn = await findByRole("button", {name: "Next"});
+    const nextButton = await findByRole("button", {name: "Next"});
 
-    expect(nextBtn).toBeDisabled();
+    expect(nextButton).toBeDisabled();
     
   }),
   it("Можно перейти на следующий вопрос, ответив на текущий", async() => {
@@ -49,15 +49,15 @@ describe("Все кнопки работают", () => {
     
     const { findByRole, container } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
 
-    const answerBtn = container.querySelector(".MuiButtonBase-root");
-    const nextBtn = await findByRole("button", {name: "Next"});
+    const answerButton = container.querySelector(".MuiButtonBase-root");
+    const nextButton = await findByRole("button", {name: "Next"});
       //@ts-ignore
-    fireEvent.click(answerBtn);
-    expect(nextBtn).not.toBeDisabled();
+    fireEvent.click(answerButton);
+    expect(nextButton).not.toBeDisabled();
   }),
   it("При нажатии на кнопку Next появляется следующий вопрос", async() => {
     const app = (
@@ -68,15 +68,15 @@ describe("Все кнопки работают", () => {
     
     const { findByRole, container, getByText } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
 
-    const answerBtn = container.querySelector(".MuiButtonBase-root");
-    const nextBtn = await findByRole("button", {name: "Next"});
+    const answerButton = container.querySelector(".MuiButtonBase-root");
+    const nextButton = await findByRole("button", {name: "Next"});
       //@ts-ignore
-    fireEvent.click(answerBtn);
-    fireEvent.click(nextBtn);
+    fireEvent.click(answerButton);
+    fireEvent.click(nextButton);
     expect(getByText("Question 2 / 10")).toBeInTheDocument();
   })
 })

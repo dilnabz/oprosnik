@@ -5,7 +5,7 @@ import { answersSlice } from "../features/answersSlice";
 export const store = configureStore({
   reducer: {
     quizData: dataSlice.reducer,
-    answQData: answersSlice.reducer,
+    answeredQuestionsData: answersSlice.reducer,
   },
 });
 

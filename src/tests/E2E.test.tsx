@@ -12,25 +12,25 @@ test("Стандартный сценарий прохождения опрос�
 
   const { findByRole, container, findByText } = render(app);
 
-  const startBtn = await findByRole("button", { name: "Let's start!" });
+  const startButton = await findByRole("button", { name: "Let's start!" });
 
-  fireEvent.click(startBtn);
+  fireEvent.click(startButton);
 
   const questionsNumber = 10;
 
   for (let i = 0; i < questionsNumber - 1; i++) {
-    const answerBtn = container.querySelector(".MuiButtonBase-root");
-    const nextBtn = await findByRole("button", { name: "Next" });
+    const answerButton = container.querySelector(".MuiButtonBase-root");
+    const nextButton = await findByRole("button", { name: "Next" });
     //@ts-ignore
-    fireEvent.click(answerBtn);
-    fireEvent.click(nextBtn);
+    fireEvent.click(answerButton);
+    fireEvent.click(nextButton);
   }
-  const showResultsBtn = await findByRole("button", { name: "Show Results" });
-  const answerBtn = container.querySelector(".MuiButtonBase-root");
+  const showResultsButton = await findByRole("button", { name: "Show Results" });
+  const answerButton = container.querySelector(".MuiButtonBase-root");
 
   //@ts-ignore
-  fireEvent.click(answerBtn);
-  fireEvent.click(showResultsBtn);
+  fireEvent.click(answerButton);
+  fireEvent.click(showResultsButton);
 
   const results = await findByText("Congratulations! Here your results:");
 

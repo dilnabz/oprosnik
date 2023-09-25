@@ -6,7 +6,7 @@ import { fetchQuiz } from "./redux/features/dataSlice";
 import { Typography, Button, Box, CircularProgress } from "@mui/material";
 
 export function App() {
-  const answQData = useAppSelector((state) => state.answQData);
+  const answeredQuestionsData = useAppSelector((state) => state.answeredQuestionsData);
   const quizData = useAppSelector((state) => state.quizData);
 
   const dispatch = useAppDispatch();
@@ -25,9 +25,9 @@ export function App() {
       </Box>
     );
   }
-
+  console.log(quizData)
   if (showResults) {
-    return <Results quizData={quizData} answQData={answQData} />;
+    return <Results quizData={quizData} answeredQuestionsData={answeredQuestionsData} />;
   }
 
   if (start) {

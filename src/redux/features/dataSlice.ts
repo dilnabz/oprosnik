@@ -2,18 +2,19 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getData, RawQuestion } from "../../quizApi/quizApi";
 import quizData from "../../quizData.json";
 
-function getRandomUniqId(): number {
-  let numbers = [];
-  for (let i = 100; i < 1000; i++) {
-    numbers.push(i);
+const getRandomUniqId = (() => {
+  const set = new Set();
+  function helper() {
+    let uniqNumber =  Math.floor(Math.random() * 900) + 100;
+    while (set.has(uniqNumber)) {
+      uniqNumber =  Math.floor(Math.random() * 900) + 100;
+    }
+    set.add(uniqNumber);
+    return uniqNumber;
   }
-  numbers.sort(() => Math.random() - 0.5);
-  if (numbers.length === 0) {
-    return Math.floor(Math.random() * 900) + 100;
-  } else {
-    return numbers.pop()!;
-  }
-}
+
+  return helper;
+})();
 
 export const fetchQuiz = createAsyncThunk("quiz/fetchQuiz", async () => {
   //Получение данных из API

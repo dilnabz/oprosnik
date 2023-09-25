@@ -13,9 +13,9 @@ describe("Карточка вопроса отображается коррек�
     
     const { findByRole, getByText } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
   
     await waitFor(() => {
       const questionNumber = getByText("Question 1 / 10");
@@ -37,12 +37,12 @@ describe("Карточка вопроса отображается коррек�
     
     const { findByRole, container } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
 
-    const radioBtn = container.querySelector(".MuiRadio-root");
-    expect(radioBtn).toBeInTheDocument();
+    const radioButton = container.querySelector(".MuiRadio-root");
+    expect(radioButton).toBeInTheDocument();
   }),
   it("Если вариантов ответа несколько используется чекбокс", async() => {
     const app = (
@@ -53,21 +53,21 @@ describe("Карточка вопроса отображается коррек�
     
     const { findByRole, container } = render(app);
   
-    const startBtn = await findByRole("button", {name: "Let's start!"});
+    const startButton = await findByRole("button", {name: "Let's start!"});
   
-    fireEvent.click(startBtn);
+    fireEvent.click(startButton);
 
     const questionsNumber = 4;
 
     for(let i = 0; i < questionsNumber; i++) {
-      const answerBtn = container.querySelector(".MuiButtonBase-root");
-      const nextBtn = await findByRole("button", {name: "Next"});
+      const answerButton = container.querySelector(".MuiButtonBase-root");
+      const nextButton = await findByRole("button", {name: "Next"});
         //@ts-ignore
-      fireEvent.click(answerBtn);
-      fireEvent.click(nextBtn);
+      fireEvent.click(answerButton);
+      fireEvent.click(nextButton);
     }
 
-    const checkboxBtn = container.querySelector(".MuiCheckbox-root");
-    expect(checkboxBtn).toBeInTheDocument();
+    const checkboxButton = container.querySelector(".MuiCheckbox-root");
+    expect(checkboxButton).toBeInTheDocument();
   })
 });
